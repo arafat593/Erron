@@ -4,7 +4,13 @@ import 'app_text_styles.dart';
 
 ThemeData themeData() {
   return ThemeData(
-    scaffoldBackgroundColor: AppColors.whiteColor,
+    scaffoldBackgroundColor: AppColors.backgroundColor,
+
+    textTheme: TextTheme(
+      bodyLarge: TextStyle(
+        color: AppColors.whiteLight,
+      ),
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.whiteColor,
       elevation: 0,
@@ -12,7 +18,7 @@ ThemeData themeData() {
       unselectedLabelStyle: AppTextStyles.medium12,
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.backgroundColor,
       iconTheme: IconThemeData(color: AppColors.whiteColor),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -22,10 +28,16 @@ ThemeData themeData() {
       style: OutlinedButton.styleFrom(),
     ),
     inputDecorationTheme: InputDecorationTheme(
-
-      border: OutlineInputBorder(),
-      enabledBorder: OutlineInputBorder(),
-      focusedBorder: OutlineInputBorder(),
+        hintStyle: TextStyle(color: AppColors.whiteLight),
+        labelStyle: TextStyle(color: AppColors.whiteLight),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: AppColors.whiteLight)
+        ),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: AppColors.whiteLight)
+        )
     ),
   );
 }

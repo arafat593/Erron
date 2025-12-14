@@ -5,15 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppTextStyles {
   static TextStyle _style(double size, FontWeight weight,Color color) =>
-      TextStyle(fontSize: size.sp, fontWeight: weight,color: AppColors.whiteColor);
+      TextStyle(fontSize: size.sp, fontWeight: weight,color: color);
 
-  static TextStyle light(double s) => _style(s, FontWeight.w300, AppColors.whiteColor);
-  static TextStyle regular(double s) => _style(s, FontWeight.w400, AppColors.whiteColor);
-  static TextStyle medium(double s) => _style(s, FontWeight.w500, AppColors.whiteColor);
-  static TextStyle semiBold(double s) => _style(s, FontWeight.w600, AppColors.whiteColor);
-  static TextStyle bold(double s) => _style(s, FontWeight.w700, AppColors.whiteColor);
-  static TextStyle extraBold(double s) => _style(s, FontWeight.w800, AppColors.whiteColor);
-  static TextStyle black(double s) => _style(s, FontWeight.w900, AppColors.whiteColor);
+  static TextStyle light(double s) => _style(s, FontWeight.w300, AppColors.whiteLight);
+  static TextStyle regular(double s) => _style(s, FontWeight.w400, AppColors.whiteLight);
+  static TextStyle medium(double s) => _style(s, FontWeight.w500, AppColors.whiteLight);
+  static TextStyle semiBold(double s) => _style(s, FontWeight.w600, AppColors.whiteLight);
+  static TextStyle bold(double s) => _style(s, FontWeight.w700, AppColors.whiteLight);
+  static TextStyle extraBold(double s) => _style(s, FontWeight.w800, AppColors.whiteLight);
+  static TextStyle black(double s) => _style(s, FontWeight.w900, AppColors.whiteLight);
 
   static TextStyle get light8 => light(8);
   static TextStyle get regular8 => regular(8);
