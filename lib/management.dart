@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
 
 import 'app/data/theme.dart';
 import 'app/routes/app_pages.dart';
@@ -20,6 +21,8 @@ class Management extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
+        defaultTransition: Transition.fadeIn,
+        transitionDuration: Duration(milliseconds: 300),
       ),
     );
   }

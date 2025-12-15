@@ -6,11 +6,7 @@ ThemeData themeData() {
   return ThemeData(
     scaffoldBackgroundColor: AppColors.backgroundColor,
 
-    textTheme: TextTheme(
-      bodyLarge: TextStyle(
-        color: AppColors.whiteLight,
-      ),
-    ),
+    textTheme: TextTheme(bodyLarge: TextStyle(color: AppColors.whiteLight)),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.whiteColor,
       elevation: 0,
@@ -22,22 +18,37 @@ ThemeData themeData() {
       iconTheme: IconThemeData(color: AppColors.whiteColor),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(),
+      style: ElevatedButton.styleFrom(
+        textStyle: AppTextStyles.bold16,
+        backgroundColor: AppColors.primaryColor,
+        foregroundColor: AppColors.whiteLight,
+        padding: EdgeInsets.symmetric(vertical: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(),
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(
+          color: AppColors.whiteLight,
+          width: 1,),
+        textStyle: AppTextStyles.bold16,
+        backgroundColor: AppColors.outlineButtonColor,
+        foregroundColor: AppColors.whiteLight,
+        padding: EdgeInsets.symmetric(vertical: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-        hintStyle: TextStyle(color: AppColors.whiteLight),
-        labelStyle: TextStyle(color: AppColors.whiteLight),
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: AppColors.whiteLight)
-        ),
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: AppColors.whiteLight)
-        )
+      hintStyle: TextStyle(color: AppColors.whiteLight),
+      labelStyle: TextStyle(color: AppColors.whiteLight),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: AppColors.whiteLight),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: AppColors.whiteLight),
+      ),
     ),
   );
 }

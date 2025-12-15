@@ -1,23 +1,14 @@
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
-  //TODO: Implement RegisterController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  RxBool obSecure=true.obs;
+  RxBool isObSecure=true.obs;
+  void changeObSecure(){
+    obSecure.value = !obSecure.value;
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void changeIsObSecure(){
+    isObSecure.value = !isObSecure.value;
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }
