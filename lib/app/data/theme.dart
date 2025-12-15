@@ -5,6 +5,10 @@ import 'app_text_styles.dart';
 ThemeData themeData() {
   return ThemeData(
     scaffoldBackgroundColor: AppColors.backgroundColor,
+    splashFactory: NoSplash.splashFactory,
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    hoverColor: Colors.transparent,
 
     textTheme: TextTheme(bodyLarge: TextStyle(color: AppColors.whiteLight)),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(

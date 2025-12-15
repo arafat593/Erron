@@ -51,13 +51,15 @@ class LoginView extends GetView<LoginController> {
                             onPressed: () {
                               controller.changeObSecure();
                             },
-                            icon:controller.obSecure.value ? Icon(
-                              Icons.visibility_off,
-                              color: AppColors.whiteLight,
-                            ):Icon(
-                              Icons.visibility,
-                              color: AppColors.whiteLight,
-                            )
+                            icon: controller.obSecure.value
+                                ? Icon(
+                                    Icons.visibility_off,
+                                    color: AppColors.whiteLight,
+                                  )
+                                : Icon(
+                                    Icons.visibility,
+                                    color: AppColors.whiteLight,
+                                  ),
                           ),
                         ),
                       ),
@@ -87,7 +89,9 @@ class LoginView extends GetView<LoginController> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed(Routes.CUSTOM_BOTTOM_BAR);
+                        },
                         child: Text("Login"),
                       ),
                     ),

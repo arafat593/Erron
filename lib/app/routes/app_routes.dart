@@ -11,6 +11,10 @@ abstract class Routes {
   static const EMAIL_VERIFICATION = _Paths.EMAIL_VERIFICATION;
   static const EMAIL_VERIFICATION_CODE = _Paths.EMAIL_VERIFICATION_CODE;
   static const NEW_PASSWORD = _Paths.NEW_PASSWORD;
+  static const CUSTOM_BOTTOM_BAR = _Paths.CUSTOM_BOTTOM_BAR;
+  static const EXPLORE = _Paths.EXPLORE;
+  static const LIVE_VIDEO = _Paths.LIVE_VIDEO;
+  static const MESSAGE = _Paths.MESSAGE;
 }
 
 abstract class _Paths {
@@ -23,4 +27,8 @@ abstract class _Paths {
   static const EMAIL_VERIFICATION = '/email-verification';
   static const EMAIL_VERIFICATION_CODE = '/email-verification-code';
   static const NEW_PASSWORD = '/new-password';
+  static const CUSTOM_BOTTOM_BAR = '/custom-bottom-bar';
+  static const EXPLORE = '/explore';
+  static const LIVE_VIDEO = '/live-video';
+  static const MESSAGE = '/message';
 }
