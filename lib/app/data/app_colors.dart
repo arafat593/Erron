@@ -9,6 +9,8 @@ class AppColors{
   static const Color pink = Color(0xffDD2C91);
   static const Color yellow = Color(0xffDDD12C);
   static const Color outlineButtonColor = Color(0xff1c1d29);
+  static const Color CrossButtonColor = Color(0xff9a242c);
+  static const Color liveDotColor = Color(0xffdd2c91);
 
 
 

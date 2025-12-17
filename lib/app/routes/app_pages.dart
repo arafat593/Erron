@@ -30,7 +30,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.CUSTOM_BOTTOM_BAR;
+  static const INITIAL = Routes.LIVE_VIDEO;
 
   static final routes = <GetPage>[
     GetPage(
@@ -45,7 +45,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.HOME,
-      page: () => const HomeView(),
+      page: () =>  HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
