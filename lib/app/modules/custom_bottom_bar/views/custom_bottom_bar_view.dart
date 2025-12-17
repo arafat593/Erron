@@ -9,10 +9,11 @@ class CustomBottomBarView extends GetView<CustomBottomBarController> {
 
   @override
   Widget build(BuildContext context) {
-    final args=Get.arguments;
-    final index=args["index"];
-    if(index!=null){
-      controller.changeIndex(index);
+    final args = Get.arguments;
+    if (args != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        controller.changeIndex(args["index"]);
+      });
     }
     return Scaffold(
       body: Obx(() => controller.screens[controller.selectIndex.value]),
