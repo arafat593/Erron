@@ -9,12 +9,12 @@ class CustomBottomBarView extends GetView<CustomBottomBarController> {
 
   @override
   Widget build(BuildContext context) {
-    final args=Get.arguments;
-    final index=args["index"];
-    if(index!=null){
-      controller.changeIndex(index);
-    }
-    return Scaffold(
+    // final args=Get.arguments;
+    // final index=args["index"];
+    // if(index!=null){
+    //   controller.changeIndex(index);
+    // }
+     return Scaffold(
       body: Obx(() => controller.screens[controller.selectIndex.value]),
 
       bottomNavigationBar: Theme(
