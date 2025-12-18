@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,56 +5,54 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../data/app_colors.dart';
 
 class CustomBlurButton extends StatelessWidget {
+  final double? height;
+  final double? width;
+  final Widget? child;
+  final double? borderRadius;
+  final double? horizontalMargin;
+  final double? verticalMargin;
+  final Color? buttonColor;
+  final Color? borderColor;
+
   const CustomBlurButton({
     super.key,
+    this.child,
+    this.height,
+    this.width,
+    this.borderRadius,
+    this.horizontalMargin,
+    this.verticalMargin,
+    this.buttonColor,
+    this.borderColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 100.w,
-      height: 32.h,
+      height: height?.h ?? 35.h,
+      width: width?.h ?? 100.w,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(borderRadius?.r ?? 30.r),
         child: BackdropFilter(
           filter: ImageFilter.blur(
-            sigmaX: 5,
-            sigmaY: 5,
+            sigmaX: 6,
+            sigmaY: 10,
             // tileMode: TileMode.mirror,
           ),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14),
+            padding: EdgeInsets.symmetric(
+              horizontal: horizontalMargin?.w ?? 8.w,
+              vertical: verticalMargin?.h ?? 8.h,
+            ),
             decoration: BoxDecoration(
-              color: Colors.white10,
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(
-                color: Colors.white60,
-              ),
+              color: buttonColor ?? Color(0xff262733).withAlpha(25),
+              borderRadius: BorderRadius.circular(borderRadius?.r ?? 30.r),
+              border: Border.all(color: borderColor ?? Color(0xffcbccd8)),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 10,
-                  height: 10,
-                  decoration: const BoxDecoration(
-                    color:AppColors.liveDotColor,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                SizedBox(width: 8),
-                Text(
-                  "Not Live",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
+            child: child,
           ),
         ),
-      ),);
+      ),
+    );
   }
 }
