@@ -45,7 +45,7 @@ class CustomBlurButton extends StatelessWidget {
               vertical: verticalMargin?.h ?? 8.h,
             ),
             decoration: BoxDecoration(
-              color: buttonColor ?? Color(0xff262733).withAlpha(25),
+              color: buttonColor ?? Color(0xff262733).withAlpha(20),
               borderRadius: BorderRadius.circular(borderRadius?.r ?? 30.r),
               border: Border.all(color: borderColor ?? Color(0xffcbccd8)),
             ),

@@ -30,7 +30,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LIVE_VIDEO;
+  static const INITIAL = Routes.CUSTOM_BOTTOM_BAR;
 
   static final routes = <GetPage>[
     GetPage(
