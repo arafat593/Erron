@@ -29,7 +29,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Expanded buildGridView() {
+  Widget buildGridView() {
     return Expanded(
       child: GridView.builder(
         shrinkWrap: true,
@@ -177,12 +177,11 @@ class HomeView extends GetView<HomeController> {
                                 semanticsLabel: 'Download progress',
                                 semanticsValue: '85%',
                               ),
-                              SizedBox(
-                                height: 4.h,
-                              ),
+                              SizedBox(height: 4.h),
 
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Flexible(
                                     flex: 1,
@@ -244,7 +243,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Padding buildTopButton() {
+  Widget buildTopButton() {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Row(
