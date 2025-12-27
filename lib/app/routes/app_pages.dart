@@ -30,7 +30,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.CUSTOM_BOTTOM_BAR;
+  static const INITIAL = Routes.LOGIN;
 
   static final routes = <GetPage>[
     GetPage(
