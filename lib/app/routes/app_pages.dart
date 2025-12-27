@@ -74,9 +74,9 @@ class AppPages {
       binding: NewPasswordBinding(),
     ),
     GetPage(
-      name: _Paths.CUSTOM_BOTTOM_BAR,
-      page: () => const CustomBottomBarView(),
-      binding: CustomBottomBarBinding(),
+        name: _Paths.CUSTOM_BOTTOM_BAR,
+        page: () => const CustomBottomBarView(),
+        binding: CustomBottomBarBinding(),
     ),
     GetPage(
       name: _Paths.EXPLORE,
