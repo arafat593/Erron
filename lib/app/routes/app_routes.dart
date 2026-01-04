@@ -15,6 +15,8 @@ abstract class Routes {
   static const EXPLORE = _Paths.EXPLORE;
   static const LIVE_VIDEO = _Paths.LIVE_VIDEO;
   static const MESSAGE = _Paths.MESSAGE;
+  static const CHAT_SCREEN = _Paths.CHAT_SCREEN;
+  static const ON_BOARDING = _Paths.ON_BOARDING;
 }
 
 abstract class _Paths {
@@ -31,4 +33,6 @@ abstract class _Paths {
   static const EXPLORE = '/explore';
   static const LIVE_VIDEO = '/live-video';
   static const MESSAGE = '/message';
+  static const CHAT_SCREEN = '/chat-screen';
+  static const ON_BOARDING = '/on-boarding';
 }

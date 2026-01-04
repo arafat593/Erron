@@ -13,6 +13,7 @@ class AppColors{
   static const Color CrossButtonColor = Color(0xff9a242c);
   static const Color readColor = Color(0xffFB101C);
   static const Color liveDotColor = Color(0xffdd2c91);
+  static const Color lightBlack = Color(0x19F6F6FD);
 
 
 

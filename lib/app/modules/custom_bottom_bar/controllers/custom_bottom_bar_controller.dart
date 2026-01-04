@@ -11,7 +11,7 @@ class CustomBottomBarController extends GetxController {
     const HomeView(),
     const ExploreView(),
     const LiveVideoView(),
-    const MessageView(),
+         MessageView(),
     const ProfileView(),
   ];
 

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/chat_screen/bindings/chat_screen_binding.dart';
+import '../modules/chat_screen/views/chat_screen_view.dart';
 import '../modules/custom_bottom_bar/bindings/custom_bottom_bar_binding.dart';
 import '../modules/custom_bottom_bar/views/custom_bottom_bar_view.dart';
 import '../modules/email_verification/bindings/email_verification_binding.dart';
@@ -18,6 +20,8 @@ import '../modules/message/bindings/message_binding.dart';
 import '../modules/message/views/message_view.dart';
 import '../modules/new_password/bindings/new_password_binding.dart';
 import '../modules/new_password/views/new_password_view.dart';
+import '../modules/onBoarding/bindings/on_boarding_binding.dart';
+import '../modules/onBoarding/views/on_boarding_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/register/bindings/register_binding.dart';
@@ -30,22 +34,22 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.ON_BOARDING;
 
   static final routes = <GetPage>[
     GetPage(
       name: Routes.LOGIN,
-      page: () => const LoginView(),
+      page: () => LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(
       name: Routes.REGISTER,
-      page: () =>  RegisterView(),
+      page: () => RegisterView(),
       binding: RegisterBinding(),
     ),
     GetPage(
       name: Routes.HOME,
-      page: () =>  HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -55,7 +59,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SIGN_UP_VERIFICATION_CODE,
-      page: () => const SignUpVerificationCodeView(),
+      page: () => SignUpVerificationCodeView(),
       binding: SignUpVerificationCodeBinding(),
     ),
     GetPage(
@@ -74,9 +78,9 @@ class AppPages {
       binding: NewPasswordBinding(),
     ),
     GetPage(
-        name: _Paths.CUSTOM_BOTTOM_BAR,
-        page: () => const CustomBottomBarView(),
-        binding: CustomBottomBarBinding(),
+      name: _Paths.CUSTOM_BOTTOM_BAR,
+      page: () => const CustomBottomBarView(),
+      binding: CustomBottomBarBinding(),
     ),
     GetPage(
       name: _Paths.EXPLORE,
@@ -92,6 +96,16 @@ class AppPages {
       name: _Paths.MESSAGE,
       page: () => const MessageView(),
       binding: MessageBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT_SCREEN,
+      page: () => const ChatScreenView(),
+      binding: ChatScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.ON_BOARDING,
+      page: () => const OnBoardingView(),
+      binding: OnBoardingBinding(),
     ),
   ];
 }
