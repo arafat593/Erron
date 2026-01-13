@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/live_video_controller.dart';
+import '../controllers/live_controller.dart';
 
-class LiveVideoView extends GetView<LiveVideoController> {
-  const LiveVideoView({super.key});
+class LiveView extends GetView<LiveController> {
+  const LiveView({super.key});
 
   @override
   Widget build(BuildContext context) {

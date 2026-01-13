@@ -8,6 +8,7 @@ class ImagePath {
   static const String person = '$imageUrl/person_2.png';
   static const String instaLive = '$imageUrl/insta_live.png';
   static const String model_1 = '$imageUrl/model_1.png';
+  static const String splashImage = '$imageUrl/splashImage.png';
 
 
 

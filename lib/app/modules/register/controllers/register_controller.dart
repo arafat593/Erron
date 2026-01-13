@@ -43,7 +43,7 @@ class RegisterController extends GetxController {
       print(response.statusCode);
       if(response.statusCode == 201){
         await SharedPrefService.saveUserEmail(emailTEController.text);
-        Get.snackbar("success", "Login Successful");
+        Get.snackbar("success", "Register Successful");
         Get.toNamed(Routes.SIGN_UP_VERIFICATION_CODE);
       }else{
         Get.snackbar("Failed", response.body);

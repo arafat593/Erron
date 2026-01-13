@@ -1,7 +1,8 @@
+import 'package:errone/app/modules/live/bindings/live_binding.dart';
+import 'package:errone/app/modules/live/views/live_view.dart';
 import 'package:get/get.dart';
-
-import '../modules/chat_screen/bindings/chat_screen_binding.dart';
-import '../modules/chat_screen/views/chat_screen_view.dart';
+import '../modules/chat/bindings/chat_screen_binding.dart';
+import '../modules/chat/views/chat_screen_view.dart';
 import '../modules/custom_bottom_bar/bindings/custom_bottom_bar_binding.dart';
 import '../modules/custom_bottom_bar/views/custom_bottom_bar_view.dart';
 import '../modules/email_verification/bindings/email_verification_binding.dart';
@@ -12,8 +13,6 @@ import '../modules/explore/bindings/explore_binding.dart';
 import '../modules/explore/views/explore_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/live_video/bindings/live_video_binding.dart';
-import '../modules/live_video/views/live_video_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/message/bindings/message_binding.dart';
@@ -64,17 +63,17 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.EMAIL_VERIFICATION,
-      page: () => const EmailVerificationView(),
+      page: () =>  EmailVerificationView(),
       binding: EmailVerificationBinding(),
     ),
     GetPage(
       name: _Paths.EMAIL_VERIFICATION_CODE,
-      page: () => const EmailVerificationCodeView(),
+      page: () =>  EmailVerificationCodeView(),
       binding: EmailVerificationCodeBinding(),
     ),
     GetPage(
       name: _Paths.NEW_PASSWORD,
-      page: () => const NewPasswordView(),
+      page: () =>  NewPasswordView(),
       binding: NewPasswordBinding(),
     ),
     GetPage(
@@ -89,8 +88,8 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LIVE_VIDEO,
-      page: () => const LiveVideoView(),
-      binding: LiveVideoBinding(),
+      page: () => const LiveView(),
+      binding: LiveBinding(),
     ),
     GetPage(
       name: _Paths.MESSAGE,

@@ -1,3 +1,57 @@
+// lib/app/modules/message/controllers/message_controller.dart
+import 'package:get/get.dart';
+import '../../../data/service/socket_service.dart';
+import '../../../data/api_service/chat_provider/chat_provider.dart';
+import '../models/active_user_model.dart';
+import '../../../routes/app_pages.dart'; // Routes import করুন
+
+class MessageController extends GetxController {
+  final SocketService socketService = Get.find();
+  final ChatProvider provider = ChatProvider();
+  final activeUsers = <ActiveUser>[].obs;
+  final isLoadingUsers = true.obs;
+
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+    await socketService.connect();
+    await fetchActiveUsers();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+  }
+
+  Future<void> fetchActiveUsers() async {
+    isLoadingUsers.value = true;
+    try {
+      final users = await provider.getActiveUsers();
+      activeUsers.assignAll(users);
+      print("ACTIVE USERS COUNT: ${users.length}");
+    } catch (e) {
+      print("Active user error: $e");
+      Get.snackbar('Error', 'Failed to load active users: $e');
+    } finally {
+      isLoadingUsers.value = false;
+    }
+  }
+
+  void selectUser(ActiveUser user) {
+    // সঠিক route name ব্যবহার করুন
+    Get.toNamed(Routes.CHAT_SCREEN, arguments: user);
+
+    // Debugging এর জন্য
+    print('Navigating to: ${Routes.CHAT_SCREEN}');
+    print('User: ${user.fullName}');
+  }
+
+  Future<void> refreshActiveUsers() async {
+    await fetchActiveUsers();
+  }
+}
+
+/*
 import 'dart:convert';
 import 'package:errone/app/data/service/socket_service.dart';
 import 'package:errone/app/modules/message/models/active_user_model.dart';
@@ -142,10 +196,4 @@ class MessageController extends GetxController {
   }
 }
 
-
-
-
-
-
-
-
+*/

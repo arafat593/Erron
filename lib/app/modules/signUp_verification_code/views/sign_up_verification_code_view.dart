@@ -1,5 +1,4 @@
 import 'package:errone/app/data/app_text_styles.dart';
-import 'package:errone/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

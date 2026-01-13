@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AuthApiService {
-  static Future<dynamic> signUpRequest(
-    String url,
-    Map<String, dynamic> body,
-  ) async {
+  static Future<dynamic> signUpRequest(String url,
+      Map<String, dynamic> body,) async {
     try {
       final response = await http.post(
         Uri.parse(url),
@@ -17,6 +15,8 @@ class AuthApiService {
       throw "Sign up request failed $e";
     }
   }
+
+
 
   static Future<dynamic> otpRequest(
     String url,
@@ -47,6 +47,34 @@ class AuthApiService {
       return response;
     } catch (e) {
       throw "Sign In request failed $e";
+    }
+  }
+
+  static Future<dynamic> emailVerificationRequest(String url,
+      Map<String, dynamic> body,) async {
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(body),
+      );
+      return response;
+    } catch (e) {
+      throw "Email request failed $e";
+    }
+  }
+
+  static Future<dynamic> resetPassword(String url,
+      Map<String, dynamic> body,) async {
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(body),
+      );
+      return response;
+    } catch (e) {
+      throw "Request failed $e";
     }
   }
 }

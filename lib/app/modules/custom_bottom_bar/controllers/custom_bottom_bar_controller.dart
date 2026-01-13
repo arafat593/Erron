@@ -1,6 +1,6 @@
 import 'package:errone/app/modules/explore/views/explore_view.dart';
 import 'package:errone/app/modules/home/views/home_view.dart';
-import 'package:errone/app/modules/live_video/views/live_video_view.dart';
+import 'package:errone/app/modules/live/views/live_view.dart';
 import 'package:errone/app/modules/message/views/message_view.dart';
 import 'package:errone/app/modules/profile/views/profile_view.dart';
 import 'package:get/get.dart';
@@ -10,7 +10,7 @@ class CustomBottomBarController extends GetxController {
   final screens = [
     const HomeView(),
     const ExploreView(),
-    const LiveVideoView(),
+    const LiveView(),
          MessageView(),
     const ProfileView(),
   ];
