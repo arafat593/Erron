@@ -17,6 +17,9 @@ abstract class Routes {
   static const MESSAGE = _Paths.MESSAGE;
   static const CHAT_SCREEN = _Paths.CHAT_SCREEN;
   static const ON_BOARDING = _Paths.ON_BOARDING;
+  static const LIVE_STREAM = _Paths.LIVE_STREAM;
+  static const LIVE_ROOM = _Paths.LIVE_ROOM;
+  static const VIEWER_LIVE = _Paths.VIEWER_LIVE;
 }
 
 abstract class _Paths {
@@ -35,4 +38,7 @@ abstract class _Paths {
   static const MESSAGE = '/message';
   static const CHAT_SCREEN = '/chat-screen';
   static const ON_BOARDING = '/on-boarding';
+  static const LIVE_STREAM = '/live-stream';
+  static const LIVE_ROOM = '/live-room';
+  static const VIEWER_LIVE = '/viewer-live';
 }

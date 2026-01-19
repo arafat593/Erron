@@ -1,6 +1,5 @@
-import 'package:errone/app/modules/live/bindings/live_binding.dart';
-import 'package:errone/app/modules/live/views/live_view.dart';
 import 'package:get/get.dart';
+
 import '../modules/chat/bindings/chat_screen_binding.dart';
 import '../modules/chat/views/chat_screen_view.dart';
 import '../modules/custom_bottom_bar/bindings/custom_bottom_bar_binding.dart';
@@ -13,6 +12,10 @@ import '../modules/explore/bindings/explore_binding.dart';
 import '../modules/explore/views/explore_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/live_room/bindings/live_room_binding.dart';
+import '../modules/live_room/views/live_room_view.dart';
+import '../modules/live_stream/bindings/live_stream_binding.dart';
+import '../modules/live_stream/views/live_stream_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/message/bindings/message_binding.dart';
@@ -27,6 +30,8 @@ import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/signUp_verification_code/bindings/sign_up_verification_code_binding.dart';
 import '../modules/signUp_verification_code/views/sign_up_verification_code_view.dart';
+import '../modules/viewer_live/bindings/viewer_live_binding.dart';
+import '../modules/viewer_live/views/viewer_live_view.dart';
 
 part 'app_routes.dart';
 
@@ -63,17 +68,17 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.EMAIL_VERIFICATION,
-      page: () =>  EmailVerificationView(),
+      page: () => EmailVerificationView(),
       binding: EmailVerificationBinding(),
     ),
     GetPage(
       name: _Paths.EMAIL_VERIFICATION_CODE,
-      page: () =>  EmailVerificationCodeView(),
+      page: () => EmailVerificationCodeView(),
       binding: EmailVerificationCodeBinding(),
     ),
     GetPage(
       name: _Paths.NEW_PASSWORD,
-      page: () =>  NewPasswordView(),
+      page: () => NewPasswordView(),
       binding: NewPasswordBinding(),
     ),
     GetPage(
@@ -85,11 +90,6 @@ class AppPages {
       name: _Paths.EXPLORE,
       page: () => const ExploreView(),
       binding: ExploreBinding(),
-    ),
-    GetPage(
-      name: _Paths.LIVE_VIDEO,
-      page: () => const LiveView(),
-      binding: LiveBinding(),
     ),
     GetPage(
       name: _Paths.MESSAGE,
@@ -105,6 +105,21 @@ class AppPages {
       name: _Paths.ON_BOARDING,
       page: () => const OnBoardingView(),
       binding: OnBoardingBinding(),
+    ),
+    GetPage(
+      name: _Paths.LIVE_STREAM,
+      page: () => LiveStreamView(),
+      binding: LiveStreamBinding(),
+    ),
+    GetPage(
+      name: _Paths.LIVE_ROOM,
+      page: () => const LiveRoomView(),
+      binding: LiveRoomBinding(),
+    ),
+    GetPage(
+      name: _Paths.VIEWER_LIVE,
+      page: () => const ViewerLiveView(),
+      binding: ViewerLiveBinding(),
     ),
   ];
 }

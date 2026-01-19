@@ -1,379 +1,10 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import '../controllers/message_controller.dart';
-//
-// class MessageView extends GetView<MessageController> {
-//   const MessageView({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Chat'),
-//         centerTitle: true,
-//       ),
-//       body: Column(
-//         children: [
-//           // Active Users List
-//           Container(
-//             height: 110,
-//             padding: const EdgeInsets.symmetric(vertical: 10),
-//             color: Colors.grey[100],
-//             child: Obx(() {
-//               if (controller.isLoadingUsers.value) {
-//                 return const Center(child: CircularProgressIndicator());
-//               }
-//               if (controller.activeUsers.isEmpty) {
-//                 return const Center(child: Text('No active users'));
-//               }
-//               return ListView.separated(
-//                 scrollDirection: Axis.horizontal,
-//                 padding: const EdgeInsets.symmetric(horizontal: 16),
-//                 itemCount: controller.activeUsers.length,
-//                 separatorBuilder: (_, __) => const SizedBox(width: 16),
-//                 itemBuilder: (context, index) {
-//                   final user = controller.activeUsers[index];
-//                   return GestureDetector(
-//                     onTap: () => controller.selectUser(user),
-//                     child: Column(
-//                       children: [
-//                         Stack(
-//                           children: [
-//                             CircleAvatar(
-//                               radius: 30,
-//                               backgroundImage: NetworkImage(user.profileImage),
-//                               onBackgroundImageError: (_, __) {
-//                                 // Fallback icon or image
-//                               },
-//                               child: user.profileImage.isEmpty
-//                                   ? const Icon(Icons.person)
-//                                   : null,
-//                             ),
-//                             Positioned(
-//                               right: 2,
-//                               bottom: 2,
-//                               child: Container(
-//                                 width: 14,
-//                                 height: 14,
-//                                 decoration: BoxDecoration(
-//                                   color: Colors.green,
-//                                   shape: BoxShape.circle,
-//                                   border: Border.all(
-//                                       color: Colors.white, width: 2),
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                         const SizedBox(height: 5),
-//                         Text(
-//                           user.fullName
-//                               .split(' ')
-//                               .first,
-//                           style: const TextStyle(fontSize: 12),
-//                           overflow: TextOverflow.ellipsis,
-//                         ),
-//                       ],
-//                     ),
-//                   );
-//                 },
-//               );
-//             }),
-//           ),
-//
-//           Expanded(
-//             child: Obx(() {
-//               if (controller.selectedUser.value == null) {
-//                 return const Center(
-//                   child: Column(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     children: [
-//                       Icon(Icons.chat_bubble_outline, size: 64,
-//                           color: Colors.grey),
-//                       SizedBox(height: 16),
-//                       Text('Select a user to start chatting'),
-//                     ],
-//                   ),
-//                 );
-//               }
-//
-//               return Column(
-//                 children: [
-//                   // Chat Header for Selected User
-//                   Container(
-//                     padding: const EdgeInsets.all(12),
-//                     color: Colors.grey[200],
-//                     child: Row(
-//                       children: [
-//                         Text(
-//                           'Chatting with ${controller.selectedUser.value!
-//                               .fullName}',
-//                           style: const TextStyle(fontWeight: FontWeight.bold),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//
-//                   // Messages List
-//                   Expanded(
-//                     child: ListView.builder(
-//                       padding: const EdgeInsets.all(16),
-//                       itemCount: controller.messages.length,
-//                       itemBuilder: (context, index) {
-//                         final msg = controller.messages[index];
-//                         return Align(
-//                           alignment: msg.isMe
-//                               ? Alignment.centerRight
-//                               : Alignment.centerLeft,
-//                           child: Container(
-//                             margin: const EdgeInsets.only(bottom: 8),
-//                             padding: const EdgeInsets.symmetric(
-//                                 horizontal: 16, vertical: 10),
-//                             decoration: BoxDecoration(
-//                               color: msg.isMe
-//                                   ? Colors.blue
-//                                   : Colors.grey[300],
-//                               borderRadius: BorderRadius.circular(20),
-//                             ),
-//                             child: Text(
-//                               msg.message,
-//                               style: TextStyle(
-//                                 color: msg.isMe ? Colors.white : Colors.black,
-//                               ),
-//                             ),
-//                           ),
-//                         );
-//                       },
-//                     ),
-//                   ),
-//
-//                   // Input Area
-//                   Padding(
-//                     padding: const EdgeInsets.all(8.0),
-//                     child: Row(
-//                       children: [
-//                         Expanded(
-//                           child: TextField(
-//                             controller: controller.messageController,
-//                             decoration: InputDecoration(
-//                               hintText: 'Type a message...',
-//                               border: OutlineInputBorder(
-//                                 borderRadius: BorderRadius.circular(24),
-//                               ),
-//                               contentPadding: const EdgeInsets.symmetric(
-//                                   horizontal: 20, vertical: 10),
-//                             ),
-//                           ),
-//                         ),
-//                         const SizedBox(width: 8),
-//                         IconButton(
-//                           icon: const Icon(Icons.send, color: Colors.blue),
-//                           onPressed: controller.sendMessage,
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               );
-//             }),
-//           ),
-//         ],
-//       ),
-//     );
-//
-//     /*return Scaffold(
-//       backgroundColor: AppColors.backgroundColor,
-//       appBar: AppBar(
-//         title: Text(
-//           "Message",
-//           style: AppTextStyles.bold24.copyWith(color: AppColors.whiteLight),
-//         ),
-//         actions: [
-//           SizedBox(
-//             width: 184,
-//             height: 34,
-//             child: DecoratedBox(
-//               decoration: BoxDecoration(
-//                 borderRadius: BorderRadius.circular(64),
-//
-//                 border: Border.all(color: AppColors.whiteLight),
-//                 color: Color(0x19F6F6FD),
-//               ),
-//               child: Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 16),
-//                 child: Row(
-//                   children: [
-//                     Icon(Icons.search),
-//                     Text(
-//                       "Search",
-//                       style: AppTextStyles.regular12.copyWith(
-//                         color: AppColors.whiteLight,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//       body: CustomScrollView(
-//         slivers: [
-//           SliverToBoxAdapter(
-//             child: Obx(() {
-//               if (controller.activeUserInProgressing.value) {
-//                 return const SizedBox(
-//                   height: 65,
-//                   child: Center(child: CircularProgressIndicator()),
-//                 );
-//               }
-//
-//               if (controller.activeUserModel.isEmpty) {
-//                 return const SizedBox(
-//                   height: 65,
-//                   child: Center(child: Text("No Active Users",style: TextStyle(color: AppColors.whiteLight),)),
-//                 );
-//               }
-//
-//               return SizedBox(
-//                 height: 65,
-//                 child: ListView.builder(
-//                   scrollDirection: Axis.horizontal,
-//                   itemCount: controller.activeUserModel.length,
-//                   shrinkWrap: true,
-//                   itemBuilder: (context, index) {
-//                     final data = controller.activeUserModel[index];
-//                     return Padding(
-//                       padding: const EdgeInsets.symmetric(horizontal: 3),
-//                       child: GestureDetector(
-//                         onTap: ()async{
-//                           final token = await SharedPrefService.getUserToken();
-//                           if (token == null) {
-//                             Get.offAllNamed(Routes.LOGIN);
-//                             return;
-//                           }
-//
-//                           Get.toNamed(Routes.CHAT_SCREEN,arguments: controller.activeUserModel[index]);
-//                         },
-//                         child: Stack(
-//                           children: [
-//                             SizedBox(
-//                               height: 56,
-//                               width: 56,
-//                               child: CircleAvatar(
-//                                 backgroundImage: data.profileImage.isNotEmpty
-//                                     ? NetworkImage(data.profileImage)
-//                                     : const AssetImage(ImagePath.person)
-//                                 as ImageProvider,
-//                               ),
-//                             ),
-//                             Positioned(
-//                               bottom: 9,
-//                               right: 6,
-//                               child: SizedBox(
-//                                 height: 10,
-//                                 width: 10,
-//                                 child: DecoratedBox(
-//                                   decoration: BoxDecoration(
-//                                     borderRadius: BorderRadius.circular(10),
-//                                     color: Colors.green,
-//                                   ),
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     );
-//                   },
-//                 ),
-//               );
-//             }),
-//           ),
-//
-//
-//           SliverPadding(
-//             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-//             sliver: SliverList.builder(
-//               itemCount: 20,
-//               itemBuilder: (context, index) {
-//                 return buildPersonProfile();
-//               },
-//             ),
-//           ),
-//         ],
-//       ),
-//     );*/
-//   }
-//
-//   /*Widget buildPersonProfile() {
-//     return Padding(
-//                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-//                 child: GestureDetector(
-//                   onTap: (){
-//                   },
-//                   child: Row(
-//                     children: [
-//                       SizedBox(
-//                         height: 56,
-//                         width: 56,
-//                         child: const CircleAvatar(),
-//                       ),
-//                       SizedBox(width: 10),
-//                       Expanded(
-//                         child: Column(
-//                           crossAxisAlignment: CrossAxisAlignment.start,
-//                           children: [
-//                             Text(
-//                               "Cameron Williamson",
-//                               style: AppTextStyles.bold16.copyWith(
-//                                 color: AppColors.whiteLight,
-//                               ),
-//                             ),
-//                             Text(
-//                               "Have you spoken to the delivery man? He is more than an hour late",
-//                               style: AppTextStyles.regular12.copyWith(
-//
-//                                 color: AppColors.whiteLight,overflow: TextOverflow.ellipsis,
-//                               ),maxLines: 1,
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                       SizedBox(width: 2),
-//                       Column(
-//                         crossAxisAlignment: CrossAxisAlignment.end,
-//                         children: [
-//                           Text(
-//                             "11.11",
-//                             style: AppTextStyles.regular12.copyWith(
-//                               color: AppColors.whiteLight,
-//                             ),
-//                           ),
-//                           SizedBox(
-//                             height: 16,
-//                             width: 16,
-//                             child: DecoratedBox(
-//                               decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 color: AppColors.pinkColor,
-//                               ),
-//                               child: Center(child: Text("4",style: TextStyle(color: AppColors.whiteLight),)),
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               );
-//   }*/
-// }
-
-
+import 'package:errone/app/data/app_colors.dart';
+import 'package:errone/app/data/app_text_styles.dart';
 import 'package:errone/app/modules/message/controllers/message_controller.dart';
+import 'package:errone/app/modules/message/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../chat/models/conversation.dart';
 
 class MessageView extends GetView<MessageController> {
   const MessageView({super.key});
@@ -382,70 +13,279 @@ class MessageView extends GetView<MessageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Messages',style: TextStyle(fontSize: 16,color: Colors.white),),
-        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          'Message',
+          style: AppTextStyles.bold24.copyWith(color: AppColors.whiteLight),
+        ),
+        actions: [
+          Container(
+            margin: const EdgeInsets.only(right: 16, top: 8, bottom: 8),
+            width: 184,
+            child: TextField(
+              onChanged: (val) => controller.search(val),
+              decoration: InputDecoration(
+                hintText: 'Search',
+
+                hintStyle: const TextStyle(color: AppColors.whiteLight),
+                prefixIcon: const Icon(
+                  Icons.search,
+                  color: AppColors.whiteLight,
+                  size: 20,
+                ),
+                filled: true,
+                fillColor: AppColors.outlineButtonColor,
+                contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Obx(() {
-        if (controller.isLoadingUsers.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (controller.activeUsers.isEmpty) {
+        if (controller.isLoading.value &&
+            controller.activeUsers.isEmpty &&
+            controller.conversations.isEmpty) {
           return const Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.people_outline, size: 64, color: Colors.grey),
-                SizedBox(height: 16),
-                Text('No active users'),
-              ],
-            ),
+            child: CircularProgressIndicator(color: Colors.blueAccent),
           );
         }
-        return ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: controller.activeUsers.length,
-          itemBuilder: (context, index) {
-            final user = controller.activeUsers[index];
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: (){
-                    controller.selectUser(user);
-                  },
-                  child: Stack(
-                    children: [
-                      CircleAvatar(
-                        radius: 24,
-                        backgroundImage: NetworkImage(user.profileImage),
-                        onBackgroundImageError: (_, __) {},
-                        child: user.profileImage.isEmpty
-                            ? const Icon(Icons.person)
-                            : null,
-                      ),
-                      Positioned(
-                        right: 0,
-                        bottom: 0,
-                        child: Container(
-                          width: 12,
-                          height: 12,
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 2),
-                          ),
+
+        if (controller.searchResults.isNotEmpty) {
+          return ListView.builder(
+            itemCount: controller.searchResults.length,
+            itemBuilder: (context, index) {
+              final user = controller.searchResults[index];
+              return ListTile(
+                onTap: () => controller.startChat(user),
+                /*leading: CircleAvatar(
+                  backgroundImage: user.profileImage != null && user.profileImage!.isNotEmpty
+                      ? NetworkImage(AuthService.getFullUrl(user.profileImage))
+                      : null,
+                  child: user.profileImage == null || user.profileImage!.isEmpty
+                      ? const Icon(Icons.person)
+                      : null,
+                ),*/
+                title: Text(user.fullName),
+                subtitle: Text(
+                  user.email,
+                  style: const TextStyle(color: Colors.grey),
+                ),
+                trailing: user.isOnline
+                    ? Container(
+                        width: 10,
+                        height: 10,
+                        decoration: const BoxDecoration(
+                          color: Colors.green,
+                          shape: BoxShape.circle,
                         ),
-                      ),
-                    ],
+                      )
+                    : null,
+              );
+            },
+          );
+        }
+
+        return RefreshIndicator(
+          onRefresh: controller.fetchAllData,
+          color: Colors.blueAccent,
+          child: CustomScrollView(
+            slivers: [
+              // Active Users Horizontal List
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 100,
+                  padding: const EdgeInsets.only(top: 10),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    itemCount: controller.activeUsers.length,
+                    itemBuilder: (context, index) {
+                      final user = controller.activeUsers[index];
+                      return _buildActiveUserAvatar(user);
+                    },
                   ),
                 ),
+              ),
 
-              ],
-            );
+              // "Chats" Title
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(16, 6, 16, 10),
+                  child: Text(
+                    'Chats',
+                    style: AppTextStyles.bold24.copyWith(
+                      color: AppColors.whiteLight,
+                    ),
+                  ),
+                ),
+              ),
 
-          },
+              // Recent Conversations Vertical List
+              if (controller.conversations.isEmpty)
+                 SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Center(
+                    child: Text(
+                      "No recent chats",
+                      style: AppTextStyles.bold24.copyWith(
+                        color: AppColors.whiteLight,
+                      ),
+                    ),
+                  ),
+                )
+              else
+                SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final conversation = controller.conversations[index];
+                    return _buildConversationItem(conversation);
+                  }, childCount: controller.conversations.length),
+                ),
+            ],
+          ),
         );
       }),
     );
+  }
+
+  Widget _buildActiveUserAvatar(UserModel user) {
+    return GestureDetector(
+      onTap: () => controller.startChat(user),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 8),
+        child: Stack(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.pinkAccent, width: 2),
+              ),
+              child: CircleAvatar(
+                radius: 30,
+                /*backgroundImage: user.profileImage != null && user.profileImage!.isNotEmpty
+                    ? NetworkImage(AuthService.getFullUrl(user.profileImage))
+                    : null,*/
+                child: user.profileImage == null || user.profileImage!.isEmpty
+                    ? const Icon(Icons.person, color: Colors.white)
+                    : null,
+              ),
+            ),
+            Positioned(
+              right: 2,
+              bottom: 25,
+              child: Container(
+                width: 14,
+                height: 14,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF2ECC71),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: const Color(0xFF0F121D),
+                    width: 2.5,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildConversationItem(Conversation conversation) {
+    final user = conversation.otherUser;
+
+    return ListTile(
+      onTap: () => controller.startChatWithConversation(conversation),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      leading: Stack(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.pinkAccent, width: 2),
+            ),
+            child: CircleAvatar(
+              radius: 28,
+              /* backgroundImage: user.profileImage != null && user.profileImage!.isNotEmpty
+                  ? NetworkImage(AuthService.getFullUrl(user.profileImage))
+                  : null,*/
+              child: user.profileImage == null || user.profileImage!.isEmpty
+                  ? const Icon(Icons.person)
+                  : null,
+            ),
+          ),
+          if (user.isOnline)
+            Positioned(
+              right: 0,
+              bottom: 0,
+              child: Container(
+                width: 14,
+                height: 14,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF2ECC71),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: const Color(0xFF0F121D),
+                    width: 2.5,
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+      title: Text(
+        user.fullName ?? "User",
+        style: AppTextStyles.bold16.copyWith(
+          color: AppColors.whiteLight,
+        ),
+      ),
+      subtitle: Text(
+        conversation.lastMessage ??
+            (conversation.lastImageUrl != null ? "Sent an image" : ""),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: AppTextStyles.bold12.copyWith(
+          color: AppColors.whiteLight,
+        ),
+      ),
+      trailing: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            _formatTime(conversation.createdAt),
+            style: const TextStyle(color: Colors.grey, fontSize: 12),
+          ),
+          const SizedBox(height: 4),
+          if (conversation.unreadCount > 0)
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: const BoxDecoration(
+                color: Color(0xFFE91E63),
+                shape: BoxShape.circle,
+              ),
+              child: Text(
+                '${conversation.unreadCount}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  String _formatTime(DateTime time) {
+    return "${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}";
   }
 }

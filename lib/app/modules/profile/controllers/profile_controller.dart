@@ -1,9 +1,7 @@
-import 'package:errone/app/modules/live/models/live_stream_model.dart';
 import 'package:errone/app/modules/profile/models/profile_model.dart';
 import 'package:get/get.dart';
-
-import '../../../data/api_service/live_stream_provider/live_stream_provider.dart';
 import '../../../data/api_service/profile_provider/profile_provider.dart';
+import '../../live_stream/models/live_stream_model.dart';
 
 
 class ProfileController extends GetxController {
@@ -11,7 +9,7 @@ class ProfileController extends GetxController {
 
   var selectedActionIndex = 0.obs;
   final ProfileProvider profileProvider = Get.find<ProfileProvider>();
-  final LiveStreamProvider liveStreamProvider = Get.find<LiveStreamProvider>();
+
 
   final isLoading = true.obs;
   final user = Rxn<ProfileModel>();
@@ -21,7 +19,7 @@ class ProfileController extends GetxController {
   void onInit() {
     super.onInit();
     fetchProfile();
-    fetchPastStreams();
+   // fetchPastStreams();
   }
 
   Future<void> fetchProfile() async {
@@ -39,12 +37,12 @@ class ProfileController extends GetxController {
     }
   }
 
-  Future<void> fetchPastStreams() async {
-    try {
-      final streams = await liveStreamProvider.getUserLiveStreams();
-      pastStreams.assignAll(streams);
-    } catch (e) {
-      print("Past Streams Error: $e");
-    }
-  }
+  // Future<void> fetchPastStreams() async {
+  //   try {
+  //     final streams = await liveStreamProvider.getUserLiveStreams();
+  //     pastStreams.assignAll(streams);
+  //   } catch (e) {
+  //     print("Past Streams Error: $e");
+  //   }
+  // }
 }

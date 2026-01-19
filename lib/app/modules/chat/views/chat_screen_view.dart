@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import '../controllers/chat_controller.dart';
 
 
@@ -10,89 +11,129 @@ class ChatScreenView extends GetView<ChatController> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Row(
           children: [
             CircleAvatar(
-              radius: 16,
-              backgroundImage: NetworkImage(controller.selectedUser.profileImage),
-              child: controller.selectedUser.profileImage.isEmpty
-                  ? const Icon(Icons.person, size: 16)
+              radius: 18,
+              backgroundImage: controller.receiverImage != null &&
+                  controller.receiverImage!.isNotEmpty
+                  ? NetworkImage(controller.receiverImage!)
+                  : null,
+              child: controller.receiverImage == null
+                  ? const Icon(Icons.person)
                   : null,
             ),
-            const SizedBox(width: 12),
-            Text(controller.selectedUser.fullName),
+            const SizedBox(width: 10),
+            Text(controller.receiverName),
           ],
         ),
       ),
       body: Column(
         children: [
-          // Messages List
           Expanded(
-            child: Obx(() => ListView.builder(
-              reverse: true,
-              padding: const EdgeInsets.all(16),
-              itemCount: controller.messages.length,
-              itemBuilder: (context, index) {
-                final msg = controller.messages.reversed.toList()[index];
-                return Align(
-                  alignment: msg.isMe
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 8),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 10),
-                    decoration: BoxDecoration(
-                      color: msg.isMe
-                          ? Theme.of(context).primaryColor
-                          : Colors.grey[300],
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      msg.message,
-                      style: TextStyle(
-                        color: msg.isMe ? Colors.white : Colors.black,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            )),
-          ),
+            child: Obx(() {
+              if (controller.isLoading.value && controller.messages.isEmpty) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              return ListView.builder(
+                controller: controller.scrollController,
+                padding: const EdgeInsets.all(10),
+                itemCount: controller.messages.length,
+                itemBuilder: (context, index) {
+                  final msg = controller.messages[index];
+                  final isMe = msg.senderId != controller.receiverId;
 
-          // Input Area
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: controller.messageController,
-                    decoration: InputDecoration(
-                      hintText: 'Type a message...',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(24),
+                  return Align(
+                    alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: isMe ? Colors.blueAccent : Colors.grey[800],
+                        borderRadius: BorderRadius.only(
+                          topLeft: const Radius.circular(12),
+                          topRight: const Radius.circular(12),
+                          bottomLeft: Radius.circular(isMe ? 12 : 0),
+                          bottomRight: Radius.circular(isMe ? 0 : 12),
+                        ),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
+                      child: Column(
+                        crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                        children: [
+                          if (msg.imageUrl != null)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                controller.profile.user.value?.profileImage ?? '',
+                                width: 200,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          if (msg.message != null)
+                            Text(
+                              msg.message!,
+                              style: const TextStyle(color: Colors.white, fontSize: 15),
+                            ),
+                          const SizedBox(height: 2),
+                          /*Text(
+                            "${msg.createdAt.hour}:${msg.createdAt.minute}",
+                            style: TextStyle(color: Colors.white70, fontSize: 10),
+                          ),*/
+                        ],
+                      ),
                     ),
-                    onSubmitted: (_) => controller.sendMessage(),
-                  ),
+                  );
+                },
+              );
+            }),
+          ),
+          _buildInputArea(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInputArea() {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      color: Colors.black26,
+      child: Row(
+        children: [
+          IconButton(
+            icon: const Icon(Icons.image, color: Colors.blueAccent),
+            onPressed: () async {
+              final picker = ImagePicker();
+              final image = await picker.pickImage(source: ImageSource.gallery);
+              if (image != null) {
+                controller.sendImage(image.path);
+              }
+            },
+          ),
+          Expanded(
+            child: TextField(
+              controller: controller.messageController,
+              decoration: InputDecoration(
+                hintText: "Say Something...",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25),
+                  borderSide: BorderSide.none,
                 ),
-                const SizedBox(width: 8),
-                IconButton(
-                  icon: Icon(Icons.send, color: Theme.of(context).primaryColor),
-                  onPressed: controller.sendMessage,
-                ),
-              ],
+                fillColor: Colors.grey[900],
+                filled: true,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              ),
+              style: const TextStyle(color: Colors.white),
             ),
+          ),
+          const SizedBox(width: 5),
+          IconButton(
+            icon: const Icon(Icons.send, color: Colors.blueAccent),
+            onPressed: () => controller.sendMessage(),
           ),
         ],
       ),
     );
   }
 }
-

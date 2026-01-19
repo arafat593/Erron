@@ -19,7 +19,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
         child: Column(
           children: [
             const SizedBox(height: 4),
-           Image.asset(ImagePath.splashImage,scale: 4,),
+           Image.asset(ImagePath.splashImage,scale: 5,),
 
 
 
@@ -38,7 +38,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
                   Text(
                     "Go Live, Your Way",
                     textAlign: TextAlign.center,
-                    style:AppTextStyles.bold36.copyWith(color: AppColors.whiteLight),
+                    style:AppTextStyles.bold32.copyWith(color: AppColors.whiteLight),
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -73,16 +73,17 @@ class OnBoardingView extends GetView<OnBoardingController> {
   }
   Widget _buildImageComposition() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: SizedBox(
         width: double.infinity,
-        height: 420,
+        height: 440,
         child: Stack(
           alignment: Alignment.center,
           children: [
             // TOP
             Positioned(
               top: 0,
+              height: 160,
               child: _buildImageContainer(
                 imageUrl:
                 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1',
@@ -91,6 +92,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
 
             // LEFT (vertical pill, just moved left)
             Positioned(
+              height: 190,
               left: 0,
               child: _buildImageContainer(
                 imageUrl:
@@ -100,6 +102,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
 
             // RIGHT (vertical pill, just moved right)
             Positioned(
+              height: 190,
               right: 0,
               child: _buildImageContainer(
                 imageUrl:
@@ -109,7 +112,8 @@ class OnBoardingView extends GetView<OnBoardingController> {
 
             // BOTTOM
             Positioned(
-              bottom: 0,
+              height: 160,
+              bottom: -2,
               child: _buildImageContainer(
                 imageUrl:
                 'https://images.unsplash.com/photo-1517841905240-472988babdf9',
@@ -123,10 +127,11 @@ class OnBoardingView extends GetView<OnBoardingController> {
 
   Widget _buildImageContainer({
     required String imageUrl,
+     String? height,
   }) {
     return Container(
-      width: 120,
-      height: 180,
+      width: 100,
+    //  height: 180,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(90),
         image: DecorationImage(

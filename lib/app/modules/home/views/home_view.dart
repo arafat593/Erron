@@ -21,15 +21,34 @@ class HomeView extends GetView<HomeController> {
           children: [
             buildTopButton(controller),
             Expanded(
-              child: TabBarView(
-                controller: controller.tabController,
-                physics: const BouncingScrollPhysics(),
-                children: const [
-                  HomeGridView(),
-                  HomeGridView(),
-                  HomeGridView(),
-                ],
-              ),
+              child:Obx(() {
+                if(controller.streamInProgress.value){
+                  return const Center(child: CircularProgressIndicator(),);
+                }
+                return RefreshIndicator(
+                  onRefresh: controller.getStream,
+                  child: TabBarView(
+                    controller: controller.tabController,
+                    physics: const BouncingScrollPhysics(),
+                    children:  [
+                      HomeGridView(streams: controller.allStreamModel.toList(),
+                      onTap: (stream){
+                        controller.joinStream(stream.id);
+                      },),
+                      HomeGridView(streams: controller.freeStreams,
+                        onTap: (stream){
+                          controller.joinStream(stream.id);
+                        },
+                      ),
+                      HomeGridView(streams: controller.paidStreams,
+                        onTap: (stream){
+                          controller.joinStream(stream.id);
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },)
             ),
           ],
         ),
@@ -68,7 +87,7 @@ class HomeView extends GetView<HomeController> {
                  color: AppColors.primaryColor.withOpacity(.35),
                  blurRadius: 12,
                  offset: const Offset(0, 4),
-               )
+               ),
              ]
                  : [],
            ),

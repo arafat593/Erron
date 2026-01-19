@@ -14,6 +14,8 @@ class AppColors{
   static const Color readColor = Color(0xffFB101C);
   static const Color liveDotColor = Color(0xffdd2c91);
   static const Color lightBlack = Color(0x19F6F6FD);
+  static const Color greyRed = Color(0xffCF2832);
+  static const Color black09 = Color(0xff010209);
 
 
 
