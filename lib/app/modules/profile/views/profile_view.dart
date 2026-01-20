@@ -11,8 +11,9 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      backgroundColor: const Color(0xFF050511), // Main background
+      backgroundColor: const Color(0xFF050511),
       body: SingleChildScrollView(
      physics: ClampingScrollPhysics(),
         child: Stack(
@@ -144,10 +145,11 @@ class ProfileView extends GetView<ProfileController> {
       if(controller.isLoading.value){
         return Center(child:  CircularProgressIndicator(),);
       }
+      final user=controller.profileUser.value;
       return Column(
       children: [
         Text(
-          controller.user.value?.fullName ?? "Profile",
+        "${ user?.firstName ?? ''} ${ user?.lastName ?? ''}",
           style: TextStyle(
             color: Colors.white,
             fontSize: 24,
@@ -158,7 +160,7 @@ class ProfileView extends GetView<ProfileController> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
           child: Text(
-            controller.user.value?.fullName ?? "No Bio",
+            user?.bio ?? "",
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.grey[400], fontSize: 14),
           ),
@@ -177,14 +179,14 @@ class ProfileView extends GetView<ProfileController> {
       if(controller.isLoading.value){
         return Center(child: CircularProgressIndicator(),);
       }
-      final user = controller.user.value;
+      final user = controller.profileUser.value;
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
         children: [
           _buildStatItem("${user?.followersCount ?? 0}", 'Followers'),
           _buildStatItem('${user?.followingCount ?? 0}', 'Following'),
-          _buildStatItem('${user?.totalLike ?? 0}', 'Likes'),
+          _buildStatItem('${user?.totalLikes ?? 0}', 'Likes'),
         ],
       );
     });
@@ -332,7 +334,12 @@ class ProfileView extends GetView<ProfileController> {
           // Edit Profile Button
           isEditProfileSelected
               ? ElevatedButton(
-            onPressed: () => controller.selectedActionIndex.value = 1,
+            onPressed: () {
+              controller.selectedActionIndex.value = 1;
+              Get.toNamed(Routes.EDIT_PROFILE,
+                arguments: controller.profileUser.value,
+              );
+          },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF3D4BFB),
               padding: const EdgeInsets.symmetric(
@@ -349,7 +356,12 @@ class ProfileView extends GetView<ProfileController> {
             ),
           )
               : OutlinedButton(
-            onPressed: () => controller.selectedActionIndex.value = 1,
+            onPressed: (){
+              controller.selectedActionIndex.value = 1;
+              Get.toNamed(Routes.EDIT_PROFILE,
+                arguments: controller.profileUser.value,
+              );
+            },
             style: OutlinedButton.styleFrom(
               backgroundColor: const Color(0xFF1E1E2C),
               side: BorderSide(color: Colors.grey.withOpacity(0.2)),
@@ -422,7 +434,7 @@ class ProfileView extends GetView<ProfileController> {
         if(controller.isLoading.value){
           return Center(child: CircularProgressIndicator(),);
         }
-        final user= controller.user.value;
+        final user= controller.profileUser.value;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -441,10 +453,10 @@ class ProfileView extends GetView<ProfileController> {
               ],
             ),
             const SizedBox(height: 16),
-            _buildInfoRow(user?.gender ?? ""),
-            _buildInfoRow(user?.bio ?? ""),
-            _buildInfoRow(user?.country ?? ""),
             _buildInfoRow(user?.email ?? ""),
+            _buildInfoRow(user?.gender ?? ""),
+            _buildInfoRow(user?.country ?? ""),
+            _buildInfoRow(user?.phoneNumber ?? ""),
             _buildInfoRow(user?.dateOfBirth ?? ""),
           ],
         );

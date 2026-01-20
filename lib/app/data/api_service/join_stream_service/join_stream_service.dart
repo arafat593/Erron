@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 class JoinStreamService {
   static Future<dynamic> joinStreamRequest(String url) async {
     final token =await SharedPrefService.getUserToken();
+    print("token urlsss $token");
     if(token == null){
       Get.toNamed(Routes.LOGIN);
       return null;

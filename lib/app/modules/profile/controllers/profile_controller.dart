@@ -12,7 +12,7 @@ class ProfileController extends GetxController {
 
 
   final isLoading = true.obs;
-  final user = Rxn<ProfileModel>();
+  final profileUser = Rxn<ProfileModel>();
   final pastStreams = <LiveStreamModel>[].obs;
 
   @override
@@ -27,7 +27,7 @@ class ProfileController extends GetxController {
       isLoading.value = true;
       final result = await profileProvider.getMyProfile();
       if (result != null) {
-        user.value = result;
+        profileUser.value = result;
       }
     } catch (e) {
       print("Profile Error: $e");

@@ -42,9 +42,7 @@ class HomeController extends GetxController
     print("Called[][];']']';");
     streamInProgress.value = true;
     try {
-      final response = await AllStreamsService.allStreamsRequest(
-        "https://erronliveapp.mtscorporate.com/api/v1/streaming/active-streams",
-      );
+      final response = await AllStreamsService.allStreamsRequest(Urls.activeStream);
       streamInProgress.value = false;
       print("response is ok----${response.body}");
       print("statuscose${response.statusCode.toString()}");
@@ -71,6 +69,7 @@ class HomeController extends GetxController
         Urls.joinStream(joinId),
       );
       joinInProgress.value = false;
+      debugPrint("josinId${Urls.joinStream(joinId)}");
       print("response body-----${response.body}");
       print(response.statusCode);
       if (response.statusCode == 200) {

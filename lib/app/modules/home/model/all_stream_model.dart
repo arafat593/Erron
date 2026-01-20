@@ -52,30 +52,34 @@ class StreamModel {
   });
 
   factory StreamModel.fromJson(Map<String, dynamic> json) => StreamModel(
-    id: json['id'],
-    firstName: json['first_name'],
-    lastName: json['last_name'],
-    email: json['email'],
-    coins: json['coins'],
-    isVerified: json['is_verified'],
+    id: json['id'] ?? '',
+    firstName: json['first_name'] ?? '',
+    lastName: json['last_name'] ?? '',
+    email: json['email'] ?? '',
+
+    coins: (json['coins'] as num?)?.toDouble() ?? 0.0,
+
+    isVerified: json['is_verified'] ?? false,
     phoneNumber: json['phone_number'],
     country: json['country'],
     gender: json['gender'],
     dateOfBirth: json['date_of_birth'],
     bio: json['bio'],
-    isOnline: json['is_online'],
-    shady: json['shady'],
+
+    shady: (json['shady'] as num?)?.toDouble(),
+
+    isOnline: json['is_online'] ?? false,
     following: json['following'] ?? [],
-    followingCount: json['following_count'],
-    followersCount: json['followers_count'],
-    totalLikes: json['total_likes'],
-    accountStatus: json['account_status'],
-    otp: json['otp'],
-    role: json['role'],
-    profileImage: json['profile_image'],
-    authProvider: json['auth_provider'],
-    createdAt: json['created_at'],
-    updatedAt: json['updated_at'],
+    followingCount: json['following_count'] ?? 0,
+    followersCount: json['followers_count'] ?? 0,
+    totalLikes: json['total_likes'] ?? 0,
+    accountStatus: json['account_status'] ?? '',
+    otp: json['otp'] ?? '',
+    role: json['role'] ?? '',
+    profileImage: json['profile_image'] ?? '',
+    authProvider: json['auth_provider'] ?? '',
+    createdAt: json['created_at'] ?? '',
+    updatedAt: json['updated_at'] ?? '',
   );
 }
 
@@ -121,24 +125,32 @@ class AllStreamModel {
   });
 
   factory AllStreamModel.fromJson(Map<String, dynamic> json) => AllStreamModel(
-    id: json['_id'],
-    host: StreamModel.fromJson(json['host']),
-    channelName: json['channel_name'],
-    title: json['title'],
-    category: json['category'],
-    thumbnail: json['thumbnail'],
-    livekitToken: json['livekit_token'],
-    isPremium: json['is_premium'],
-    entryFee: json['entry_fee'],
+    id: json['id'] ?? '', // 🔥 FIX (_id → id)
+
+    host: StreamModel.fromJson(json['host'] ?? {}),
+
+    channelName: json['channel_name'] ?? '',
+    title: json['title'] ?? '',
+
+    category: json['category'] ?? '',
+    thumbnail: json['thumbnail'] ?? '',
+    livekitToken: json['livekit_token'] ?? '',
+
+    isPremium: json['is_premium'] ?? false,
+
+    entryFee: (json['entry_fee'] as num?)?.toDouble() ?? 0.0,
+
     startTime: json['start_time'],
     endTime: json['end_time'],
-    totalLikes: json['total_likes'],
-    earnCoins: json['earn_coins'],
-    totalViews: json['total_views'],
-    totalComments: json['total_comments'],
-    status: json['status'],
-    createdAt: json['created_at'],
-    updatedAt: json['updated_at'],
+
+    totalLikes: json['total_likes'] ?? 0,
+    earnCoins: json['earn_coins'] ?? 0,
+    totalViews: json['total_views'] ?? 0,
+    totalComments: json['total_comments'] ?? 0,
+
+    status: json['status'] ?? '',
+    createdAt: json['created_at'] ?? '',
+    updatedAt: json['updated_at'] ?? '',
   );
 
   Map<String, dynamic> toJson() => {
