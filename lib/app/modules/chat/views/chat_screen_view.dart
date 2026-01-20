@@ -1,13 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../data/app_colors.dart';
 import '../controllers/chat_controller.dart';
 
-
 class ChatScreenView extends GetView<ChatController> {
-  const ChatScreenView({super.key,});
-
+  const ChatScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +15,9 @@ class ChatScreenView extends GetView<ChatController> {
           children: [
             CircleAvatar(
               radius: 18,
-              backgroundImage: controller.receiverImage != null &&
-                  controller.receiverImage!.isNotEmpty
+              backgroundImage:
+                  controller.receiverImage != null &&
+                      controller.receiverImage!.isNotEmpty
                   ? NetworkImage(controller.receiverImage!)
                   : null,
               child: controller.receiverImage == null
@@ -46,10 +45,15 @@ class ChatScreenView extends GetView<ChatController> {
                   final isMe = msg.senderId != controller.receiverId;
 
                   return Align(
-                    alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                    alignment: isMe
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 5),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         color: isMe ? Colors.blueAccent : Colors.grey[800],
                         borderRadius: BorderRadius.only(
@@ -60,13 +64,16 @@ class ChatScreenView extends GetView<ChatController> {
                         ),
                       ),
                       child: Column(
-                        crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                        crossAxisAlignment: isMe
+                            ? CrossAxisAlignment.end
+                            : CrossAxisAlignment.start,
                         children: [
                           if (msg.imageUrl != null)
                             ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.network(
-                                controller.profile.user.value?.profileImage ?? '',
+                                controller.profile.user.value?.profileImage ??
+                                    '',
                                 width: 200,
                                 fit: BoxFit.cover,
                               ),
@@ -74,7 +81,10 @@ class ChatScreenView extends GetView<ChatController> {
                           if (msg.message != null)
                             Text(
                               msg.message!,
-                              style: const TextStyle(color: Colors.white, fontSize: 15),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
                             ),
                           const SizedBox(height: 2),
                           /*Text(
@@ -99,41 +109,58 @@ class ChatScreenView extends GetView<ChatController> {
     return Container(
       padding: const EdgeInsets.all(8),
       color: Colors.black26,
-      child: Row(
-        children: [
-          IconButton(
-            icon: const Icon(Icons.image, color: Colors.blueAccent),
-            onPressed: () async {
-              final picker = ImagePicker();
-              final image = await picker.pickImage(source: ImageSource.gallery);
-              if (image != null) {
-                controller.sendImage(image.path);
-              }
-            },
+      child:TextFormField(
+        controller: controller.messageController,
+        decoration: InputDecoration(
+          hintText: "Say Something...",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide.none,
           ),
-          Expanded(
-            child: TextField(
-              controller: controller.messageController,
-              decoration: InputDecoration(
-                hintText: "Say Something...",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
-                  borderSide: BorderSide.none,
-                ),
-                fillColor: Colors.grey[900],
-                filled: true,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+          suffixIcon: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon:  Icon(Icons.attach_file, color:AppColors.whiteLight),
+                onPressed: () async {
+                  final picker = ImagePicker();
+                  final image = await picker.pickImage(source: ImageSource.gallery);
+                  if (image != null) {
+                    controller.sendImage(image.path);
+                  }
+                },
               ),
-              style: const TextStyle(color: Colors.white),
-            ),
+              IconButton(
+                icon: const Icon(
+                  Icons.sentiment_satisfied_alt,
+                  color: AppColors.whiteLight,
+                ),
+                onPressed: () {
+                  // emoji action
+                },
+              ),
+
+              IconButton(
+                icon: const Icon(Icons.send, color: AppColors.whiteLight),
+                onPressed: () {
+                  controller.sendMessage();
+                },
+              ),
+            ],
           ),
-          const SizedBox(width: 5),
-          IconButton(
-            icon: const Icon(Icons.send, color: Colors.blueAccent),
-            onPressed: () => controller.sendMessage(),
+
+          fillColor: AppColors.outlineButtonColor,
+          filled: true,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 5,
           ),
-        ],
+        ),
+        style: const TextStyle(color: Colors.white),
       ),
+
+
+
     );
   }
 }
