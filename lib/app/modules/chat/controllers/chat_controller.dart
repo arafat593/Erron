@@ -51,7 +51,7 @@ class ChatController extends GetxController{
   void _listenToMessages() async {
 
     if (profile == null) return;
-    final currentUserId = profile.user.value?.id ?? '';
+    final currentUserId = profile.profileUser.value?.id ?? '';
 
     _messageSubscription = _socketService.messages.listen((payload) {
       final msg = ChatMessage.fromJson(payload);
@@ -82,7 +82,7 @@ class ChatController extends GetxController{
   void sendMessage() async {
     final text = messageController.text.trim();
     if (text.isEmpty) return;
-    final currentUserId= profile.user.value?.id ?? '';
+    final currentUserId= profile.profileUser.value?.id ?? '';
     final localMsg = ChatMessage(
       senderId: currentUserId, // logged in user id
       receiverId: receiverId,
@@ -106,7 +106,7 @@ class ChatController extends GetxController{
   Future<void> sendImage(String path) async {
     final imageUrl = await _chatService.uploadImage(path);
     if (imageUrl == null) return;
-    final currentUserId= profile.user.value?.id ?? '';
+    final currentUserId= profile.profileUser.value?.id ?? '';
     final localMsg = ChatMessage(
       senderId: currentUserId,
       receiverId: receiverId,
