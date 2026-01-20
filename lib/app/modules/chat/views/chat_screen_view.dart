@@ -72,7 +72,8 @@ class ChatScreenView extends GetView<ChatController> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.network(
-                                controller.profile.user.value?.profileImage ??
+                                //controller.profile.user.value?.profileImage ??
+                                controller.profile.profileUser.value?.profileImage??
                                     '',
                                 width: 200,
                                 fit: BoxFit.cover,

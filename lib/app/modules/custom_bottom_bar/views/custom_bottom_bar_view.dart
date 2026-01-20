@@ -9,11 +9,18 @@ class CustomBottomBarView extends GetView<CustomBottomBarController> {
 
   @override
   Widget build(BuildContext context) {
-    // final args=Get.arguments;
-    // final index=args["index"];
-    // if(index!=null){
-    //   controller.changeIndex(index);
-    // }
+    final args = Get.arguments as Map<String, dynamic>?;
+    if (args != null) {
+      final index = args["index"];
+      if (index is int) {
+        controller.changeIndex(index);
+      }
+    }
+     /*final args=Get.arguments;
+     final index=args["index"];
+     if(index!=null){
+       controller.changeIndex(index);
+     }*/
      return Scaffold(
       body: Obx(() => controller.screens[controller.selectIndex.value]),
 

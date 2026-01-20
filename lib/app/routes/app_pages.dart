@@ -4,6 +4,8 @@ import '../modules/chat/bindings/chat_screen_binding.dart';
 import '../modules/chat/views/chat_screen_view.dart';
 import '../modules/custom_bottom_bar/bindings/custom_bottom_bar_binding.dart';
 import '../modules/custom_bottom_bar/views/custom_bottom_bar_view.dart';
+import '../modules/edit_profile/bindings/edit_profile_binding.dart';
+import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/email_verification/bindings/email_verification_binding.dart';
 import '../modules/email_verification/views/email_verification_view.dart';
 import '../modules/email_verification_code/bindings/email_verification_code_binding.dart';
@@ -120,6 +122,11 @@ class AppPages {
       name: _Paths.VIEWER_LIVE,
       page: () => const ViewerLiveView(),
       binding: ViewerLiveBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => const EditProfileView(),
+      binding: EditProfileBinding(),
     ),
   ];
 }

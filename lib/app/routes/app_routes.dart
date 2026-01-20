@@ -20,6 +20,7 @@ abstract class Routes {
   static const LIVE_STREAM = _Paths.LIVE_STREAM;
   static const LIVE_ROOM = _Paths.LIVE_ROOM;
   static const VIEWER_LIVE = _Paths.VIEWER_LIVE;
+  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
 }
 
 abstract class _Paths {
@@ -41,4 +42,5 @@ abstract class _Paths {
   static const LIVE_STREAM = '/live-stream';
   static const LIVE_ROOM = '/live-room';
   static const VIEWER_LIVE = '/viewer-live';
+  static const EDIT_PROFILE = '/edit-profile';
 }
